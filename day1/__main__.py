@@ -14,8 +14,8 @@ def get_list_of_total_calories_of_top_three_elves_with_the_most_calories(invento
     return list_of_total_calories_of_all_elves[-3:]
 
 
-def get_input(filename: str) -> str:
-    with open(filename, "r") as f:
+def get_input(file: str) -> str:
+    with open(file, "r") as f:
         return f.read()
 
 
@@ -28,7 +28,7 @@ if __name__ == '__main__':
         calories_of_top_three_elves = get_list_of_total_calories_of_top_three_elves_with_the_most_calories(content)
 
         print(f"\n{type_of_input}\n")
-        print(f"--> Part 1: The Elf with the most Calories is carrying {max(calories_of_top_three_elves)} Calories.")
-        print(f"--> Part 2: The top three Elves are carrying {sum(calories_of_top_three_elves)} Calories in total.")
+        print(f"--> Part 1: The N°1 Elf is carrying {max(calories_of_top_three_elves)} Calories in total.")
+        print(f"--> Part 2: The TOP 3 Elves are carrying {sum(calories_of_top_three_elves)} Calories in total.")
 
     print("\n======================\n")
