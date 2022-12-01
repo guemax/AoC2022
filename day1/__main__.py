@@ -4,12 +4,15 @@ import numpy as np
 
 
 def get_max_total_calories(content: str) -> np.int_:
-    sum_of_calories = []
+    list_of_summed_calories = []
 
-    for line in content.split("\n\n"):
-        sum_of_calories.append(np.fromstring(line, dtype=np.int_, sep="\n").sum())
+    for this_elfs_calories_as_str in content.split("\n\n"):
+        this_elfs_calories = np.fromstring(this_elfs_calories_as_str, dtype=np.int_, sep="\n")
+        sum_of_this_elfs_calories = this_elfs_calories.sum()
 
-    return max(sum_of_calories)
+        list_of_summed_calories.append(sum_of_this_elfs_calories)
+
+    return max(list_of_summed_calories)
 
 
 def get_input(filename: str) -> str:
