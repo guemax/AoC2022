@@ -15,6 +15,16 @@ def get_max_total_calories(content: str) -> np.int_:
     return max(list_of_summed_calories)
 
 
+def get_list_of_total_calories_of_top_three_elves_with_the_most_calories(inventory_list: str) -> list:
+    list_of_total_calories_of_all_elves = []
+
+    for individual_calories_of_this_elf in inventory_list.split("\n\n"):
+        total_calories_of_this_elf = np.fromstring(individual_calories_of_this_elf, dtype=np.int_, sep="\n").sum()
+        list_of_total_calories_of_all_elves.append(total_calories_of_this_elf)
+
+    return list_of_total_calories_of_all_elves.sort()[-3:]
+
+
 def get_input(filename: str) -> str:
     with open(filename, "r") as f:
         return f.read()
