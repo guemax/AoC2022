@@ -2,7 +2,7 @@
 
 import unittest
 
-from .__main__ import main
+from .__main__ import get_max_total_calories
 
 
 class TestDay1(unittest.TestCase):
@@ -10,7 +10,7 @@ class TestDay1(unittest.TestCase):
         super(TestDay1, self).setUp()
 
     def test_day_one(self) -> None:
-        result = main("day1/test_input.txt")
+        result = get_max_total_calories("day1/test_input.txt")
         self.assertEqual(result, 24000)
 
 
