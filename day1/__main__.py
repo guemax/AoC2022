@@ -14,7 +14,7 @@ def get_max_total_calories(file: str):
             current_calories = 0
             continue
 
-        current_calories += int(line.removesuffix("\n"))
+        current_calories += int(line)
 
     return max_calories
 
