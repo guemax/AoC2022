@@ -20,22 +20,15 @@ def get_input(filename: str) -> str:
 
 
 if __name__ == '__main__':
-    test_input = "day1/test_input.txt"
-    input_ = "day1/input.txt"
+    print("\n======================")
 
-    test_content = get_input(test_input)
-    real_content = get_input(input_)
+    filenames = {"TEST INPUT": "day1/test_input.txt", "REAL INPUT": "day1/input.txt"}
+    for type_of_input, filename in filenames.items():
+        content = get_input(filename)
+        calories_of_top_three_elves = get_list_of_total_calories_of_top_three_elves_with_the_most_calories(content)
 
-    print("\n===== TEST INPUT =====\n")
+        print(f"\n{type_of_input}\n")
+        print(f"--> Part 1: The Elf with the most Calories is carrying {max(calories_of_top_three_elves)} Calories.")
+        print(f"--> Part 2: The top three Elves are carrying {sum(calories_of_top_three_elves)} Calories in total.")
 
-    calories_of_top_three_elves = get_list_of_total_calories_of_top_three_elves_with_the_most_calories(test_content)
-
-    print(f"The Elf with the most Calories is carrying {max(calories_of_top_three_elves)} Calories.")
-    print(f"The top three Elves are carrying {sum(calories_of_top_three_elves)} Calories in total.")
-
-    print("\n===== REAL INPUT =====")
-
-    calories_of_top_three_elves = get_list_of_total_calories_of_top_three_elves_with_the_most_calories(real_content)
-    print(f"The Elf with the most Calories is carrying {max(calories_of_top_three_elves)} Calories.")
-    print(f"The top three Elves are carrying {sum(calories_of_top_three_elves)} Calories in total.")
     print("\n======================\n")
