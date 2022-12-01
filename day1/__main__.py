@@ -3,8 +3,7 @@
 import numpy as np
 
 
-def get_max_total_calories(filename: str) -> np.int_:
-    content = get_input(filename)
+def get_max_total_calories(content: str) -> np.int_:
     sum_of_calories = []
 
     for line in content.split("\n\n"):
@@ -42,16 +41,19 @@ if __name__ == '__main__':
     test_input = "day1/test_input.txt"
     input_ = "day1/input.txt"
 
+    test_content = get_input(test_input)
+    real_content = get_input(input_)
+
     print("\n===== TEST INPUT =====\n")
 
-    solution = get_max_total_calories(test_input)
+    solution = get_max_total_calories(test_content)
     solution_part2 = get_max_total_calories_of_top_three(test_input)
 
     print(f"The Elf with the most Calories is carrying {solution} Calories.")
     print(f"The top three Elves are carrying {solution_part2} Calories in total.")
 
     print("\n===== REAL INPUT =====")
-    solution = get_max_total_calories(input_)
+    solution = get_max_total_calories(real_content)
     solution_part2 = get_max_total_calories_of_top_three(input_)
 
     print(f"The Elf with the most Calories is carrying {solution} Calories.")
