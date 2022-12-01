@@ -1,28 +1,59 @@
 #!/usr/bin/env python3
 
+import numpy as np
 
-def get_max_total_calories(file: str):
+
+def get_max_total_calories(filename: str) -> np.int_:
+    content = get_input(filename)
+    sum_of_calories = []
+
+    for line in content.split("\n\n"):
+        sum_of_calories.append(np.fromstring(line, dtype=np.int_, sep="\n").sum())
+
+    return max(sum_of_calories)
+
+
+def get_input(filename: str) -> str:
+    with open(filename, "r") as f:
+        return f.read()
+
+
+def get_max_total_calories_of_top_three(file: str):
     max_calories = 0
     current_calories = 0
-
-    with open(file, "r") as f:
-        content = f.read()
+    total_calories_of_each_elf = []
+    content = get_input(file)
 
     for line in content.splitlines():
-        if line == "":
-            max_calories = max(current_calories, max_calories)
-            current_calories = 0
+        if line != "":
+            current_calories += int(line)
             continue
 
-        current_calories += int(line)
+        max_calories = max(current_calories, max_calories)
+        total_calories_of_each_elf.append(current_calories)
 
-    return max_calories
+        current_calories = 0
+
+    total_calories_of_each_elf.append(current_calories)
+    return sum(total_calories_of_each_elf[-3:])
 
 
 if __name__ == '__main__':
     test_input = "day1/test_input.txt"
     input_ = "day1/input.txt"
 
-    print("\n===== TEST INPUT =====")
+    print("\n===== TEST INPUT =====\n")
+
     solution = get_max_total_calories(test_input)
+    solution_part2 = get_max_total_calories_of_top_three(test_input)
+
     print(f"The Elf with the most Calories is carrying {solution} Calories.")
+    print(f"The top three Elves are carrying {solution_part2} Calories in total.")
+
+    print("\n===== REAL INPUT =====")
+    solution = get_max_total_calories(input_)
+    solution_part2 = get_max_total_calories_of_top_three(input_)
+
+    print(f"The Elf with the most Calories is carrying {solution} Calories.")
+    print(f"The top three Elves are carrying {solution_part2} Calories in total.")
+    print("\n======================\n")
