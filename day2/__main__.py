@@ -11,22 +11,19 @@ def convert_letter_of_symbol_to_code(letter: str) -> np.int8:
 
 
 def get_total_score(strategy_guide: str) -> np.int_:
-    total_score = 0
-    for round in strategy_guide.splitlines():
-        their_choice, my_choice = list(map(convert_letter_of_symbol_to_code, round.split(" ")))
+    total_score_of_game = 0
+
+    for line in strategy_guide.splitlines():
+        their_choice, my_choice = list(map(convert_letter_of_symbol_to_code, line.split(" ")))
 
         delta = my_choice - their_choice
-        total_score += my_choice
+        total_score_of_game += my_choice
         if delta == 0:
-            print("Draw")
-            total_score += 3
+            total_score_of_game += 3
         elif delta > 0:
-            print("You won")
-            total_score += 6
-        else:
-            print("You lose")
+            total_score_of_game += 6
 
-    return total_score
+    return total_score_of_game
 
 
 def get_input(file: str) -> str:
