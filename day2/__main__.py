@@ -15,7 +15,22 @@ c && y == loss -> 3 2 d1 neg
 import numpy as np
 
 
+def is_greater_than_letter_c(letter: str) -> bool:
+    character_code_of_c = 67
+    return ord(letter) > character_code_of_c
+
+
+def convert_letter_to_abz_instead_of_xyz_if_necessary(letter: str) -> str:
+    offset_between_x_and_a = 23
+    if not is_greater_than_letter_c(letter):
+        return letter
+
+    return chr(ord(letter) - offset_between_x_and_a)
+
+
 def convert_letter_of_symbol_to_code(letter: str) -> np.int8:
+    letter = convert_letter_to_abz_instead_of_xyz_if_necessary(letter)
+    print(letter)
     if letter == "A" or letter == "X":
         return np.int8(1)
     elif letter == "B" or letter == "Y":
@@ -27,7 +42,6 @@ def convert_letter_of_symbol_to_code(letter: str) -> np.int8:
 def get_total_score(strategy_guide: str) -> np.int_:
     total_score = 0
     for round in strategy_guide.splitlines():
-        print(round)
         their_choice, my_choice = list(map(convert_letter_of_symbol_to_code, round.split(" ")))
 
         delta = my_choice - their_choice
