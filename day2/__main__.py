@@ -3,23 +3,11 @@
 import numpy as np
 
 
-def is_greater_than_letter_c(letter: str) -> bool:
-    character_code_of_c = 67
-    return ord(letter) > character_code_of_c
-
-
-def convert_letter_to_abz_instead_of_xyz_if_necessary(letter: str) -> str:
-    offset_between_x_and_a = 23
-    if not is_greater_than_letter_c(letter):
-        return letter
-
-    return chr(ord(letter) - offset_between_x_and_a)
-
-
 def convert_letter_of_symbol_to_code(letter: str) -> np.int8:
-    letter = convert_letter_to_abz_instead_of_xyz_if_necessary(letter)
-    code = np.int8(ord(letter) + 1 - ord("A"))
-    return code
+    captial_c = 67
+    offset_base = "A" if ord(letter) <= captial_c else "X"
+
+    return np.int8(ord(letter) + 1 - ord(offset_base))
 
 
 def get_total_score(strategy_guide: str) -> np.int_:
