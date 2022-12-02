@@ -1,17 +1,5 @@
 #!/usr/bin/env python3
-"""Combinations:
-a && x == draw -> 1 1
-b && y == draw -> 2 2
-c && z == draw -> 3 3
 
-a && y == win -> 1 2 d1 pos
-b && z == win -> 2 3 d1 pos
-c && x == win -> 3 1 d2 pos
-
-a && z == loss -> 1 3 d2 neg
-b && x == loss -> 2 1 d1 neg
-c && y == loss -> 3 2 d1 neg
-"""
 import numpy as np
 
 
@@ -30,13 +18,8 @@ def convert_letter_to_abz_instead_of_xyz_if_necessary(letter: str) -> str:
 
 def convert_letter_of_symbol_to_code(letter: str) -> np.int8:
     letter = convert_letter_to_abz_instead_of_xyz_if_necessary(letter)
-    print(letter)
-    if letter == "A" or letter == "X":
-        return np.int8(1)
-    elif letter == "B" or letter == "Y":
-        return np.int8(2)
-    elif letter == "C" or letter == "Z":
-        return np.int8(3)
+    code = np.int8(ord(letter) + 1 - ord("A"))
+    return code
 
 
 def get_total_score(strategy_guide: str) -> np.int_:
