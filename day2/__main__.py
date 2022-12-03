@@ -10,18 +10,24 @@ def convert_letter_of_symbol_to_code(letter: str) -> np.int8:
     return np.int8(ord(letter) + 1 - ord(offset_base))
 
 
-def get_total_score(strategy_guide: str) -> np.int_:
+def get_total_score(strategy_guide: str) -> int:
     total_score_of_game = 0
 
     for line in strategy_guide.splitlines():
         their_choice, my_choice = list(map(convert_letter_of_symbol_to_code, line.split(" ")))
+        print(f"{line} -> {their_choice}, {my_choice}", end="")
 
-        delta = my_choice - their_choice
-        total_score_of_game += my_choice
-        if delta == 0:
-            total_score_of_game += 3
-        elif delta > 0:
-            total_score_of_game += 6
+        if my_choice == their_choice:
+            current_score = my_choice + 3
+            print(f" === Score: {my_choice} + 3 == {current_score}")
+        elif my_choice > their_choice:
+            current_score = my_choice + 6
+            print(f" === Score: {my_choice} + 6 == {current_score}")
+        else:
+            current_score = my_choice
+            print(f" === Score: {my_choice} + 0 == {current_score}")
+
+        total_score_of_game += current_score
 
     return total_score_of_game
 
