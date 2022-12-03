@@ -1,64 +1,36 @@
 #!/usr/bin/env python3
 
-import numpy as np
+
+def get_total_score(strategy_guide: str) -> int:
+    total_score_of_game = 0
+    score_for_win = 6
+    score_for_draw = 3
+
+    for line in strategy_guide.splitlines():
+        their_choice, my_choice = list(map(from_letter_to_score_of_move, line.split()))
+
+        total_score_of_game += my_choice
+
+        if is_draw(their_choice, my_choice):
+            total_score_of_game += score_for_draw
+        elif is_win(their_choice, my_choice):
+            total_score_of_game += score_for_win
+
+    return total_score_of_game
 
 
-def from_letter_to_score(letter: str) -> int:
+def from_letter_to_score_of_move(letter: str) -> int:
     character_code_for_capital_c = 67
     offset_base = "A" if ord(letter) <= character_code_for_capital_c else "X"
     return ord(letter) - ord(offset_base) + 1
 
 
-def score(letter: str) -> int:
-    if letter == "A" or letter == "X":
-        return 1
-    elif letter == "B" or letter == "Y":
-        return 2
-    elif letter == "C" or letter == "Z":
-        return 3
+def is_win(their_choice: int, my_choice: int) -> bool:
+    return their_choice == my_choice - 1 or their_choice == my_choice + 2
 
 
-def get_total_score(strategy_guide: str) -> int:
-    total_score_of_game = 0
-
-    for line in strategy_guide.splitlines():
-        print(line)
-        their_choice, my_choice = line.split(" ")
-        """their_choice = from_letter_to_score(their_choice)
-        my_choice = from_letter_to_score(my_choice)
-        
-        if their_choice == my_choice:
-            total_score_of_game += my_choice + 3
-        elif their_choice < my_choice:
-            total_score_of_game += my_choice + 6
-        else:
-            total_score_of_game += my_choice
-"""
-        """
-        A X -> 1 1
-        B Y -> 2 2
-        C Z -> 3 3
-        
-        A Y -> 1 2
-        B Z -> 2 3
-        C X -> 3 1
-        
-        A Z -> 1 3
-        B X -> 2 1
-        C Y -> 3 2
-        """
-        if from_letter_to_score(their_choice) == from_letter_to_score(my_choice):
-            total_score_of_game += from_letter_to_score(my_choice) + 3
-        elif (their_choice == "A" and my_choice == "Y") \
-                or (their_choice == "B" and my_choice == "Z") \
-                or (their_choice == "C" and my_choice == "X"):
-            total_score_of_game += from_letter_to_score(my_choice) + 6
-        elif (their_choice == "A" and my_choice == "Z") \
-                or (their_choice == "B" and my_choice == "X") \
-                or (their_choice == "C" and my_choice == "Y"):
-            total_score_of_game += from_letter_to_score(my_choice)
-
-    return total_score_of_game
+def is_draw(their_choice: int, my_choice: int) -> bool:
+    return their_choice == my_choice
 
 
 def get_input(file: str) -> str:
