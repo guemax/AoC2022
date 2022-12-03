@@ -33,5 +33,6 @@ if __name__ == '__main__':
     assert result_part1[1] == 12458
 
     assert result_part2[0] == 12
+    assert result_part2[1] == 12683
 
     print("\n======================\n")
