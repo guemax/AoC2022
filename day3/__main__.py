@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 
-def get_sum_of_priorities(content_of_rucksacks: str) -> int:
+def get_sum_of_priorities(rucksacks: str) -> int:
     total_priorities = 0
 
-    for rucksack in content_of_rucksacks.splitlines():
+    for rucksack in rucksacks.splitlines():
         size_of_compartment = int(len(rucksack) / 2)
         intersecting_letter = ''.join(set(rucksack[:size_of_compartment]) & set(rucksack[size_of_compartment:]))
 
