@@ -6,15 +6,21 @@ def get_sum_of_priorities(rucksacks: str) -> int:
 
     for rucksack in rucksacks.splitlines():
         size_of_compartment = int(len(rucksack) / 2)
-        intersecting_letter = ''.join(set(rucksack[:size_of_compartment]) & set(rucksack[size_of_compartment:]))
-
-        current_priority = ord(intersecting_letter.lower()) - ord("a") + 1
-        if intersecting_letter.isupper():
-            current_priority += 26
-
-        total_priorities += current_priority
+        total_priorities += get_current_priority(
+            set(rucksack[:size_of_compartment]) & set(rucksack[size_of_compartment:])
+        )
 
     return total_priorities
+
+
+def get_current_priority(intersecting_set: set) -> int:
+    intersecting_letter = ''.join(intersecting_set)
+
+    current_priority = ord(intersecting_letter.lower()) - ord("a") + 1
+    if intersecting_letter.isupper():
+        current_priority += 26
+
+    return current_priority
 
 
 def get_sum_of_priorities_part2(rucksacks: str) -> int:
@@ -27,15 +33,9 @@ def get_sum_of_priorities_part2(rucksacks: str) -> int:
         i += 1
 
         if i == 3:
-            intersecting_letter = ''.join(
+            total_priorities += get_current_priority(
                 set(rucksacks_of_group[0]) & set(rucksacks_of_group[1]) & set(rucksacks_of_group[2])
             )
-            print(intersecting_letter)
-            current_priority = ord(intersecting_letter.lower()) - ord("a") + 1
-            if intersecting_letter.isupper():
-                current_priority += 26
-
-            total_priorities += current_priority
             rucksacks_of_group = []
             i = 0
 
@@ -71,5 +71,6 @@ if __name__ == '__main__':
     assert result_part1[1] == 8039
 
     assert result_part2[0] == 70
+    assert result_part2[1] == 2510
 
     print("\n======================\n")
